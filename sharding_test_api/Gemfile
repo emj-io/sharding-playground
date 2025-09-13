@@ -1,0 +1,49 @@
+source "https://rubygems.org"
+
+ruby "3.3.5"
+
+# Rails
+gem "rails", "~> 8.0.0"
+
+# Database
+gem "sqlite3", ">= 2.1"
+
+# Application server
+gem "puma", ">= 5.0"
+
+# JSON serialization
+gem "jbuilder"
+
+# CORS handling
+gem "rack-cors"
+
+# Environment variables
+gem "dotenv-rails"
+
+# Reduces boot times through caching; required in config/boot.rb
+gem "bootsnap", require: false
+
+group :development, :test do
+  # Debugging
+  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+
+  # Testing framework
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+
+  # Static analysis for security vulnerabilities
+  gem "brakeman", require: false
+
+  # Omakase Ruby styling
+  gem "rubocop-rails-omakase", require: false
+end
+
+group :development do
+  # Speed up commands on slow machines / big apps
+  gem "spring"
+end
+
+group :test do
+  gem "shoulda-matchers"
+  gem "database_cleaner-active_record"
+end

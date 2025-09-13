@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./sharding_test_api
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./sharding_test_api:/app
+      - /app/tmp
+      - /app/log
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_URL=sqlite3:db/development.sqlite3
+    command: >
+      bash -c "
+        bundle install &&
+        bundle exec rails db:create db:migrate &&
+        bundle exec rails server -b 0.0.0.0"
+    stdin_open: true
+    tty: true
+
+  # Future: Add monitoring, analytics, or other services here
+  # adminer:
+  #   image: adminer
+  #   ports:
+  #     - "8080:8080"
